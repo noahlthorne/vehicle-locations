@@ -1,11 +1,21 @@
-import express from "express";
+import express from 'express';
+import path from 'path';
+import http from 'http';
+import { Server } from 'socket.io';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+const server = http.createServer(app);
+const io = new Server(server);
 
-app.get("/", (req, res) => {
-    res.send("Well done!");
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Run when a client connects
+io.on('connection', (socket) => {
+    console.log('new connection...');
 });
 
-app.listen(3000, () => {
-    console.log("The application is listening on port 3000!");
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
