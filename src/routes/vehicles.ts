@@ -5,4 +5,6 @@ const router: Router = Router();
 // @route   POST api/vehicle
 // @desc    Test route
 // @access  Public
-router.post('/', async (req: express.Request, res: express.Response) => {});
+router.post('/', async (req: express.Request, res: express.Response) => {
+    const id = req.id;
+});
